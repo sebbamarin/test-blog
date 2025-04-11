@@ -1,0 +1,65 @@
+---
+import type { Post } from "@/types";
+
+interface Props extends Post {}
+
+const post = Astro.props;
+---
+
+<div class="card">
+  <div class="card-header">
+    <img
+      src={post.image?.url}
+      alt={post.title}
+      width="230"
+      height="200"
+      class="image"
+    />
+  </div>
+  <div class="card-body">
+    <h2 class="title">{post.title}</h2>
+    <p class="date">{new Date(post.date).toDateString()}</p>
+    <p class="description">{post.description}</p>
+  </div>
+</div>
+
+<style>
+  .card {
+    background-color: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 6px 6px 10px 2px #0006;
+    transition: all 200ms ease;
+
+    &:hover {
+      transform: scale(0.95);
+    }
+
+    .card-header {
+      img {
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px 14px;
+
+      .title {
+        font-size: 20px;
+      }
+
+      .date {
+        font-size: 12px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+    }
+  }
+</style>
